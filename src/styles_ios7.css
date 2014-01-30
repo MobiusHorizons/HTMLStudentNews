@@ -13,94 +13,30 @@
 ::-webkit-scrollbar-thumb {
 	background: #222
 }*/
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, input, textarea, header, button {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-weight: inherit;
-    font-style: inherit;
-    font-size: 100%;
-    font-family: inherit;
-    vertical-align: baseline;
-}
 
-html, body{
-	height:100%;
-	/*overflow:hidden;*/
-}
-center {
-	height:100%;
-}
-body{
-	background-color:#333;
+body.ios7{
+	background-color:#fff;
 	padding: 0px;
 	margin:0px;
+	height:100%;
 }
 
-ol, ul {
-    list-style: none;
-}
-
-ol,ul,li{
-
-    padding:0px;
-    margin:0px;
-}
-
-header {
-        position: absolute;
-        top:0;
-        height: 44px;
-        line-height: 44px;
-        width: 100%;
-	max-width:10in;
-	margin-left:auto;
-	margin-right:auto;
-	left:0px;
-	right:0px;
-        padding-top: 0;
-        background-color: rgba(248, 248, 248, 0.9);
-        background-image: linear-gradient(0deg, rgb(200, 199, 204), rgb(200, 199, 204) 50%, transparent 50%);
-        background-size: 100% 1px;
-        background-repeat: no-repeat;
-        background-position: bottom;
-        z-index: 10;
-        -webkit-user-select: none;
-           -moz-user-select: none;
-                user-select: none;
-        -webkit-touch-callout: none;
-}
-
-.arrowed li {
-        background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIKCSB5PSIwcHgiIHdpZHRoPSIzMHB4IiBoZWlnaHQ9IjMwcHgiIHZpZXdCb3g9IjAgMCAzMCAzMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMzAgMzAiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8cG9seWdvbiBvcGFjaXR5PSIwLjIiIHBvaW50cz0iNC41LDI3LjUgMiwyNSAxMiwxNSAyLDUgNC41LDIuNSAxNC41LDEyLjUgMTcsMTUgMTQuNSwxNy41IDE0LjUsMTcuNSAiLz4KPC9zdmc+Cg==);
-        background-size: 15px 15px;
-        background-repeat: no-repeat;
-        background-position: right center;
-    padding-right: 5%;
-}
 
 *, *:before, *:after {
 	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 }
 
-#content {
+#content.ios7 {
 	max-width:10in;
 	position:relative;
-	margin-left:auto;
-	margin-right:auto;
-	top:44px;
-	bottom:0px;
-	left:0px;
-	right:0px;
-	height:calc(100% - 44px);
 	background-color:#eee;
 	padding:.5em;
-	/*padding-top: 0.5em ;*/
+	width:100%;
+	height: calc( 100% - 3em ); 
 	overflow-y: auto;
 }
 
-/*#nav{
+#nav.ios7{
 	max-width:10in;
 	text-align: left;
 	padding:.5em;
@@ -108,15 +44,15 @@ header {
 	background-color:#777;
 	height: 3em;
 	
-}*/
+}
 
-#navTitle {
+#navTitle.ios7 {
 	top: 0px;
 	text-align: Left;
 	font-weight: bold;
 }
 
-#navBack{
+#navBack.ios7{
 	float:left;
 	left: 0em;
 	height: 100%;
@@ -124,7 +60,7 @@ header {
 	opacity:.5;
 }
 
-#navIcon{
+#navIcon.ios7{
 	float:left;
 	left:1em;
 	height: 100%;
@@ -147,14 +83,10 @@ header {
 	
 }
 
-ul .arrowed .content{
-	/*top:44px;*/
-}
-
 .list-item{
 	min-height:2em;
 	padding:.25em;
-	/*border-top: 1px solid gray;*/
+	border-top: 1px solid gray;
 }
 
 .entry-view{
@@ -180,21 +112,5 @@ ul .arrowed .content{
 	margin:0px;
 	padding: 0px;
 }
-li, input, textarea, header {
-	background-image:none;
-	box-shadow: 0 1px 1px -1px rgba(200, 199, 204, .5);
-        border-bottom: 1px solid rgb(200, 199, 204);
-}
 
-@media (-webkit-max-device-pixel-ratio: 1) {
-        li, input, textarea, header {
-                background-image: none;
-                border-bottom: 1px solid rgb(200, 199, 204);
-        }
-}
-@media (max-device-pixel-ratio: 1) {
-        li, input, textarea, header {
-                background-image: none;
-                border-bottom: 1px solid rgb(200, 199, 204);
-        }
-}
+

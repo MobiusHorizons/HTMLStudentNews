@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 				"dest":"js/app.js"
 			},
 			"css":{
-				"src":['src/styles_android.css','src/styles_ios7.css'],
+				"src":['src/styles.css'],
 				"dest":'css/styles.css'
 			}
 		},
