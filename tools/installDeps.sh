@@ -76,9 +76,20 @@ checkGrunt(){
 	GRUNT=$(which grunt 2> /dev/null )
 	if [ $? -ne 0 ]; then 
 		echo "installing grunt"
-		$SUDO $NPM install grunt-cli
+		$SUDO $NPM install -g grunt-cli
 		if [ $? -ne 0 ];then exit 2;fi
 		GRUNT=$(which grunt 2> /dev/null )	
+	fi
+	NODE=$(which node 2> /dev/null ) # on ubuntu node is called nodejs
+	if [ $? -ne 0 ]; then
+		NODEJS=$(which nodejs 2> /dev/null )
+		if [ $? -eq 0 ]; then
+			echo "fixing symlink for nodejs"
+			sudo ln -s -T $NODEJS /usr/bin/node
+		else
+			echo "You will need to have NodeJS, please install and run again"
+			exit 4
+		fi
 	fi
 }
 
