@@ -19,11 +19,11 @@
 
 GetPackageManager(){
 	declare -A osInfo;
-	osInfo[/etc/redhat-release]=yum
-	osInfo[/etc/arch-release]=pacman
-	osInfo[/etc/gentoo-release]=emerge
-	osInfo[/etc/SuSE-release]=zypp
-	osInfo[/etc/debian_version]=apt-get
+	osInfo[/etc/redhat-release]="yum install"
+	osInfo[/etc/arch-release]="pacman -Syw"
+	osInfo[/etc/gentoo-release]="emerge"
+	osInfo[/etc/SuSE-release]="zypper install"
+	osInfo[/etc/debian_version]="apt-get install"
 
 	PKGM=""
 	for f in ${!osInfo[@]}
@@ -65,7 +65,7 @@ checkNode(){
 	if [ $? -ne 0 ]; then 
 		GetPackageManager
 		echo "installing npm (Node Package Manager)"
-		$SUDO $PKG_MGR install npm
+		$SUDO $PKG_MGR npm
 		if [ $? -ne 0 ];then exit 1;fi
 		NPM=$(which npm 2> /dev/null )
 	fi
@@ -75,7 +75,6 @@ checkNode(){
 checkGrunt(){
 	GRUNT=$(which grunt 2> /dev/null )
 	if [ $? -ne 0 ]; then 
-		GetPackageManager
 		echo "installing grunt"
 		$SUDO $NPM install grunt-cli
 		if [ $? -ne 0 ];then exit 2;fi
