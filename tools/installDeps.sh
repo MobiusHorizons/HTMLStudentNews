@@ -6,6 +6,7 @@
 	nodeModules[concat]=grunt-contrib-concat
 	nodeModules[uglify]=grunt-contrib-uglify
 	nodeModules[cssmin]=grunt-contrib-cssmin
+	nodeModules[img-embed]=grunt-image-embed
 	nodeModules[embed]=grunt-embed
 	
 	NPM=""
@@ -50,7 +51,8 @@ checkModules(){
 	for m in ${!nodeModules[@]}
 	do
 		module=${nodeModules[$m]}
-		npm list $module 2&>/dev/null
+		echo npm list $module \| grep  $module -q
+		npm list $module |grep $module -q
 		if [ $? -ne 0 ] ; then
 			echo "installing grunt module $m "
 			$SUDO $NPM install $module

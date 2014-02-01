@@ -33,11 +33,85 @@ function JSONP(data){
 }
 
 
-Data = false;
-
 function getID(v){
 	return document.getElementById(v);
 }
+
+function getClass(v){
+	return document.getElementsByClassName(v);
+}
+
+
+var style = {};
+var UI = {};
+
+function setTitle(title){
+	if (document.readyState != 'complete'){
+		init( function(){
+			setTitle(title)
+		});
+		return;
+	}
+	
+	var navTitle = 	document.getElementsByClassName('nav-title')[0]
+	navTitle.innerHTML = title;
+	document.title = navTitle.childNodes[0].nodeValue;
+}
+
+function makeNav(){
+	var header = document.getElementsByTagName('header')[0];
+	console.log(header);
+	if (false){
+		if ( style == "android"){
+			var title = document.createElement('button');
+			var back = document.createElement('button');
+			var icon = document.createElement('button');
+			icon.classList.add('nav-icon','inline-block');
+			back.classList.add('nav-back');
+			icon.appendChild(back);
+			title.classList.add('nav-title','inline-block');
+			header.appendChild(icon);
+			header.appendChild(title);
+			UI.nav = header;
+			UI.nav.back = back;
+			UI.nav.title = title;
+			UI.nav.icon = icon;
+			
+		} else	if ( style == "ios7"){
+		}
+	} else {
+		
+		var back = document.createElement('button');
+		back.classList.add('left','arrow');//,'inline-block');
+		back.label = document.createElement('div');
+		back.label.classList.add('label');
+		var title = document.createElement('h1');
+		title.classList.add('nav-title');//,'inline-block');
+		var next = document.createElement('button');
+		next.classList.add('right');//,'inline-block');
+//		header.classList.add('inline-block');
+		
+//		header.appendChild(back);
+		header.back = back;
+		header.appendChild(title);
+		header.title = title;
+//		header.appendChild(next);
+		header.next = next;
+		UI.nav = header;
+		UI.nav.back = back;
+		UI.nav.title = title;
+		UI.nav.next = next;
+	}
+	return header;
+}
+
+//UI.nav.redraw = function(){
+	
+//}
+
+URL = "http://www.worldh.org/calvin-student-news/rss/esn-latest-issue.rss";
+Data = false;
+onReadyfuns = [];
 
 function parseRSS(url, callback) {
 JSONP({
@@ -57,20 +131,21 @@ function goBack(){
 }
 
 function navBack(v){
-	/*var back = 	getID('navBack');
-	var icon =  getID('navIcon');
-	
+	var back =  UI.nav.back;
+	var header = UI.nav;
 	if (v){
 		console.log('v = true');
-		back.classList.add('nav-back-icon');
+		back.classList.remove('hidden');
+		back.label.innerHTML = "Home";
+		back.appendChild(back.label);
 		back.addEventListener('click',goBack);
-		icon.addEventListener('click',goBack);
+		header.insertBefore(back,UI.nav.title)
 	} else {         
 		console.log('v = false');
-		back.classList.remove('nav-back-icon');
+		back.classList.add('hidden');
+		header.removeChild(back);
 		back.removeEventListener('click',goBack);
-		icon.removeEventListener('click',goBack);
-	}*/
+	}
 }
 
 function entryView( id ){
@@ -175,17 +250,46 @@ function data(data){
 }
 
 function updateData(callback){
-	parseRSS("http://www.worldh.org/calvin-student-news/rss/esn-latest-issue.rss",function(data){Data = data;callback()});
+	//parseRSS("http://www.worldh.org/calvin-student-news/rss/esn-latest-issue.rss"
+//	parseRSS("http://rss.nytimes.com/services/xml/rss/nyt/World.xml"
+	parseRSS(URL
+		,function(data){
+			Data = data;
+			setTitle(Data.title);
+			if (callback != undefined){
+				callback();
+			}
+		});
 }
 
-function init(){
-	//drawNav();
-	window.addEventListener("hashchange", routing, false);
-	routing();
+function init(fun){
+	console.log(typeof(fun));
+	if (fun != undefined && typeof(fun) == "function"){
+		onReadyfuns.push(fun);
+	}
+	console.log(document.readyState);
+	if (document.readyState == 'complete'){
+		window.addEventListener("hashchange", routing, false);
+		makeNav();
+		for (fun in onReadyfuns){
+			console.log(fun);
+			onReadyfuns[fun]();
+		}
+	}
 }
 
 function routing(){
 	console.log(location.hash);
+	if (! Data){
+		updateData(routing);
+		return;
+	}
+	if (document.readyState != 'complete'){
+		init(routing);
+		return;
+	}		
+//		document.addEventListener("DOMContentLoaded",routing);
+
 	var els = document.getElementsByTagName('*');
 	console.log(els);
 	if (location.hash=="#android"){
@@ -204,9 +308,6 @@ function routing(){
 		location.hash = "";
 	}
 			
-	if (! Data){
-		updateData(routing);
-	}
 	
 	if (location.hash == "#" || location.hash == ""){
 		clear();	
@@ -220,5 +321,5 @@ function routing(){
 	}
 }
 /*parseRSS("http://www.worldh.org/calvin-student-news/rss/esn-latest-issue.rss", data);*/
-document.onload = init(); 
-
+document.onload = updateData(routing);
+document.onreadystatechange = init;

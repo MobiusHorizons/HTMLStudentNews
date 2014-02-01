@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 		concat:{
 			"options" : { "seperator" : ";" },
 			"js": {
-				"src":['src/jsonp.js','src/main.js'],
+				"src":['src/jsonp.js','src/tools.js','src/ui.js','src/main.js'],
 				"dest":"js/app.js"
 			},
 			"css":{
@@ -27,6 +27,13 @@ module.exports = function(grunt) {
 			build:{
 				files: {
 					'js/app.min.js':[ 'js/app.js' ]
+				}
+			}
+		},
+		imageEmbed:{
+			build:{
+				files: {
+					'css/styles.css': ['css/styles.css']
 				}
 			}
 		},
@@ -56,6 +63,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks("grunt-image-embed");
 	grunt.loadNpmTasks('grunt-embed');
-	grunt.registerTask('default',['concat', 'uglify', 'cssmin','embed']);
+	grunt.registerTask('default',['concat', 'uglify','imageEmbed', 'cssmin','embed']);
 };
