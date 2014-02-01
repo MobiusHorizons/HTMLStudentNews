@@ -147,7 +147,7 @@ header button {
 	display: inline-block;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	font-size: 17px;
-	color:rgb(21, 125, 251);
+	//color:rgb(21, 125, 251);
 	padding: 0;
 	font-weight: 300;
 	height: 44px;

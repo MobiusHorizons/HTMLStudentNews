@@ -1,0 +1,19 @@
+HTML5StudentNews
+
+TO build from most *nix system, just type make
+
+This will install npm grunt and all grunt modules if you use fedora,debial/ubuntu,Arch,gentoo. I haven't tested it thoroughly, so feel free to leave feedback.
+
+IF the above fails, or you are running Windows/MacOS
+the basic install environment requires:
+
+AS ROOT:
+
+$PKGMGR install npm
+npm install grunt-cli
+npm install grunt-common-concat
+npm install grunt-common-uglify
+npm install grunt-common-cssmin
+npm install grunt-embed
+
+in order to build, just use grunt, or the makefile will run grunt for you.
