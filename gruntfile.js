@@ -3,14 +3,22 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('package.json'),
 		concat:{
 			"options" : { "seperator" : ";" },
-			"js": {
-				"src":['src/jsonp.js','src/tools.js','src/ui.js','src/main.js'],
-				"dest":"js/app.js"
+			build: {
+				files:{
+					'js/app.js':['src/jsonp.js','src/tools.js','src/ui.js','src/main.js'],
+					'css/styles.css':['src/styles.css']
+				}
 			},
-			"css":{
-				"src":['src/styles.css'],
-				"dest":'css/styles.css'
+			test: {
+				files:{
+					'js/app.min.js':['src/jsonp.js','src/tools.js','src/ui.js','src/main.js'],
+					'css/styles.min.css':['src/styles.css']
+				}
 			}
+			//"css":{
+			//	"src":['src/styles.css'],
+			//	"dest":'css/styles.css'
+			//}
 		},
 		uglify: {
 			options: {
@@ -65,5 +73,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks("grunt-image-embed");
 	grunt.loadNpmTasks('grunt-embed');
-	grunt.registerTask('default',['concat', 'uglify','imageEmbed', 'cssmin','embed']);
+	grunt.registerTask('default',['concat:build', 'uglify','imageEmbed', 'cssmin','embed']);
+	grunt.registerTask('test',['concat:test','imageEmbed','embed'])
 };
