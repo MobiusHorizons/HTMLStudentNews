@@ -2,6 +2,7 @@ var style = {};
 var UI = {};
 
 function setTitle(title){
+	console.log(UI);
 	if (document.readyState != 'complete'){
 		init( function(){
 			setTitle(title)
@@ -9,9 +10,10 @@ function setTitle(title){
 		return;
 	}
 	
-	var navTitle = 	document.getElementsByClassName('nav-title')[0]
-	navTitle.innerHTML = title;
-	document.title = navTitle.childNodes[0].nodeValue;
+	//	var navTitle = 	document.getElementsByClassName('nav-title')[0]
+	//navTitle.innerHTML = title;
+	UI.nav.caption.innerHTML = title;
+	document.title = UI.nav.caption.childNodes[0].nodeValue;
 }
 
 function makeNav(){
@@ -43,19 +45,21 @@ function makeNav(){
 		back.label.classList.add('label');
 		var title = document.createElement('h1');
 		title.classList.add('nav-title');//,'inline-block');
+		console.log('nav-title');
+		console.log(title);
 		var next = document.createElement('button');
 		next.classList.add('right');//,'inline-block');
 //		header.classList.add('inline-block');
-		
+		console.log(title);	
 //		header.appendChild(back);
-		header.back = back;
 		header.appendChild(title);
-		header.title = title;
+		console.log(title);	
 //		header.appendChild(next);
 		header.next = next;
 		UI.nav = header;
 		UI.nav.back = back;
-		UI.nav.title = title;
+		UI.nav.caption = title;
+		console.log(UI.nav.caption);
 		UI.nav.next = next;
 	}
 	return header;
@@ -64,3 +68,23 @@ function makeNav(){
 //UI.nav.redraw = function(){
 	
 //}
+
+
+function navBack(v){
+	var back =  UI.nav.back;
+	var header = UI.nav;
+	if (v){
+		console.log('v = true');
+		back.classList.remove('hidden');
+		back.label.innerHTML = "Home";
+		back.appendChild(back.label);
+		back.addEventListener('click',goBack);
+		header.insertBefore(back,header.caption)
+	} else {         
+		console.log('v = false');
+		back.classList.add('hidden');
+		header.removeChild(back);
+		back.removeEventListener('click',goBack);
+	}
+}
+

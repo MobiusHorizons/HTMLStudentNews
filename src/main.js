@@ -1,4 +1,5 @@
 URL = "http://www.worldh.org/calvin-student-news/rss/esn-latest-issue.rss";
+//URL = "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
 Data = false;
 onReadyfuns = [];
 
@@ -19,29 +20,12 @@ function goBack(){
 	navBack(false);
 }
 
-function navBack(v){
-	var back =  UI.nav.back;
-	var header = UI.nav;
-	if (v){
-		console.log('v = true');
-		back.classList.remove('hidden');
-		back.label.innerHTML = "Home";
-		back.appendChild(back.label);
-		back.addEventListener('click',goBack);
-		header.insertBefore(back,UI.nav.title)
-	} else {         
-		console.log('v = false');
-		back.classList.add('hidden');
-		header.removeChild(back);
-		back.removeEventListener('click',goBack);
-	}
-}
-
 function entryView( id ){
 	var entry = Data.entries[id];
 	var content = clear();
 	var div = contentDiv({},entry.title,entry.content);
 	div.classList.add('entry-view');
+	div.classList.add('slide-in-right');
 	id = parseInt(id);
 	Hammer(div).on('swiperight', function(){
 		if (id > 0){
