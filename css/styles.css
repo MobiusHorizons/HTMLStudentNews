@@ -220,6 +220,73 @@ header h1 {
 	
 }
 
+/*.content.slide-in-right{
+	animation-duration: .7s;
+	animation-name: slidein-right;
+}
+
+.content.slide-out-left{
+	animation-duration: .7s;
+	animation-name: slideout-left;
+}
+
+.content.slide-in-left{
+	animation-duration: .7s;
+	animation-name: slidein-left;
+}
+
+.content.slide-out-right{
+	animation-duration: .7s;
+	animation-name: slideout-right;
+}
+
+@keyframes slidein-right {
+	from{
+		margin-left:100%;
+		width: 200%;
+		
+	}
+	to {
+		width:100%;
+	}
+}
+
+@keyframes slideout-left {
+	from{
+		
+		width: 100%;
+		margin-left:0px;
+	}
+
+	to {
+		width:100%;
+		margin-left:-300%;
+	}
+}
+@keyframes slidein-left {
+	from{
+		width:100%;
+		margin-left:-300%;
+		
+	}
+	to {
+		width: 100%;
+		margin-left:0px;
+	}
+}
+
+@keyframes slideout-right {
+	from{
+		width: 100%;
+		
+	}
+
+	to {
+		margin-left:100%;
+		width: 200%;
+	}
+}*/
+
 ul .arrowed .content{
 	/*top:44px;*/
 }
