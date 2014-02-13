@@ -128,7 +128,7 @@ function updateData(callback){
 	parseRSS(URL
 		,function(data){
 			Data = data;
-			setTitle(Data.title);
+			setTitle(data.title);
 			if (callback != undefined){
 				callback();
 			}

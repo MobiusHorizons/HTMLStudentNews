@@ -44,6 +44,7 @@ function getClass(v){
 
 var style = {};
 var UI = {};
+UI.nav = {};
 
 function setTitle(title){
 	console.log(UI);
@@ -93,43 +94,43 @@ function makeNav(){
 		console.log(title);
 		var next = document.createElement('button');
 		next.classList.add('right');//,'inline-block');
-//		header.classList.add('inline-block');
 		console.log(title);	
-//		header.appendChild(back);
-		header.appendChild(title);
-		console.log(title);	
-//		header.appendChild(next);
-		header.next = next;
+		header.caption = header.appendChild(title);
 		UI.nav = header;
 		UI.nav.back = back;
-		UI.nav.caption = title;
 		console.log(UI.nav.caption);
 		UI.nav.next = next;
 	}
 	return header;
 }
 
-//UI.nav.redraw = function(){
-	
-//}
+// for now this just fixes width of the title.
+UI.nav_redraw = function(){
+	if (UI.nav.back && !UI.nav.back.classList.contains('hidden')){
+		console.log(UI.nav.back.clientWidth);
+		UI.nav.caption.style.margin = "0 " + UI.nav.back.clientWidth;
+	} else {
+		UI.nav.caption.style.margin = "0px";
+	}
+}
 
 
 function navBack(v){
 	var back =  UI.nav.back;
 	var header = UI.nav;
 	if (v){
-		console.log('v = true');
 		back.classList.remove('hidden');
 		back.label.innerHTML = "Home";
-		back.appendChild(back.label);
+		var label = back.appendChild(back.label);
 		back.addEventListener('click',goBack);
-		header.insertBefore(back,header.caption)
+		UI.nav.back = header.insertBefore(back,header.caption)
+		UI.nav.back.label = label;
 	} else {         
-		console.log('v = false');
 		back.classList.add('hidden');
 		header.removeChild(back);
 		back.removeEventListener('click',goBack);
 	}
+	UI.nav_redraw();
 }
 
 
@@ -263,7 +264,7 @@ function updateData(callback){
 	parseRSS(URL
 		,function(data){
 			Data = data;
-			setTitle(Data.title);
+			setTitle(data.title);
 			if (callback != undefined){
 				callback();
 			}
