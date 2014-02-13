@@ -15,10 +15,6 @@ module.exports = function(grunt) {
 					'css/styles.min.css':['src/styles.css']
 				}
 			}
-			//"css":{
-			//	"src":['src/styles.css'],
-			//	"dest":'css/styles.css'
-			//}
 		},
 		uglify: {
 			options: {
