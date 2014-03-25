@@ -298,8 +298,8 @@ ul .arrowed .content{
 }
 
 .entry-view{
-	border: 1px solid #555;
-	border-radius: 1em;
+	//border: 1px solid #555;
+	//border-radius: 1em;
 	overflow-x: hidden;
 	min-height: calc(100% - .5em);
 	margin-bottom: .5em;
@@ -308,6 +308,8 @@ ul .arrowed .content{
 .content-title{
 	text-align: center;
 	margin: .2em;
+	margin-bottom: 1em;
+	font-weight: 600;
 }
 
 .nav-back-icon{
@@ -321,6 +323,7 @@ ul .arrowed .content{
 	margin:0px;
 	padding: 0px;
 }
+
 li, input, textarea, header {
 	background-image:none;
 	box-shadow: 0 1px 1px -1px rgba(200, 199, 204, .5);

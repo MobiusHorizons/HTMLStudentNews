@@ -134,8 +134,54 @@ function navBack(v){
 }
 
 
+(function(UI){
+
+	UI.events = UI.events || {};
+	UI.events.touchstart = function(event){
+		if(event.targetTouches.length==1){
+			event.target.touchStartX = event.targetTouches[0].pageX;
+			event.target.touchStartY = event.targetTouches[0].pageY;
+		}
+	};
+	UI.events.touchmove = function(event){
+		tg = event.target;
+		if(event.targetTouches.length == 1){
+			event.preventDefault();
+			tg.touchLengthX = event.targetTouches[0].pageX-tg.touchStartX;
+			tg.touchLengthY = event.targetTouches[0].oageY-tg.touchStartY;
+		}
+	};
+	UI.events.touchend = function(event){
+		tg = event.target;
+		event.preventDefault();
+			if (tg.touchLengthX > 30){
+				var evt = new CustomEvent("swiperight", 
+				{detail: {
+					swipeLength: Math.abs(tg.touchLengthX)}
+				});
+				tg.dispatchEvent(evt);
+			}
+			if(tg.touchLengthX < -30){
+				var evt = new CustomEvent("swipeleft", 
+				{detail: {
+					swipeLength: Math.abs(tg.touchLengthX)}
+				});
+				tg.dispatchEvent(evt);
+			}
+	};
+	UI.events.touchcancel = function(event){
+		event.preventDefault;
+	};
+	UI.touch = function(element, options){
+		var self = this;
+		element.addEventListener('touchstart',UI.events.touchstart);
+		element.addEventListener('touchmove', UI.events.touchmove);
+		element.addEventListener('touchend', UI.events.touchend);
+	}
+
+}(window.UI = window.UI || function(){}));
+
 URL = "http://www.worldh.org/calvin-student-news/rss/esn-latest-issue.rss";
-//URL = "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
 Data = false;
 onReadyfuns = [];
 
@@ -163,7 +209,8 @@ function entryView( id ){
 	div.classList.add('entry-view');
 	div.classList.add('slide-in-right');
 	id = parseInt(id);
-	Hammer(div).on('swiperight', function(){
+	UI.touch(div);
+	div.addEventListener('swiperight',function(){ //Hammer(div).on('swiperight', function(){
 		if (id > 0){
 			id--;
 			location.hash = '';			// force the back button to go the day view.
@@ -171,7 +218,7 @@ function entryView( id ){
 			routing();
 		}
 	});
-	Hammer(div).on('swipeleft', function(){
+	div.addEventListener('swipeleft', function(){ //Hammer(div).on('swipeleft', function(){
 		if (id < Data.entries.length){
 			id ++;
 			location.hash = ''; 			// force the back button to go to the day view.
@@ -226,7 +273,7 @@ function contentDiv(vals, title, content){
 		div[k] = vals[k];
 	}
 	div.classList.add('content');
-	var t = document.createElement('h4');
+	var t = document.createElement('h3');
 	t.innerHTML = title;
 	t.classList.add('content-title');
 	div.appendChild(t);

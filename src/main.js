@@ -1,5 +1,4 @@
 URL = "http://www.worldh.org/calvin-student-news/rss/esn-latest-issue.rss";
-//URL = "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
 Data = false;
 onReadyfuns = [];
 
@@ -27,7 +26,8 @@ function entryView( id ){
 	div.classList.add('entry-view');
 	div.classList.add('slide-in-right');
 	id = parseInt(id);
-	Hammer(div).on('swiperight', function(){
+	UI.touch(div);
+	div.addEventListener('swiperight',function(){ //Hammer(div).on('swiperight', function(){
 		if (id > 0){
 			id--;
 			location.hash = '';			// force the back button to go the day view.
@@ -35,7 +35,7 @@ function entryView( id ){
 			routing();
 		}
 	});
-	Hammer(div).on('swipeleft', function(){
+	div.addEventListener('swipeleft', function(){ //Hammer(div).on('swipeleft', function(){
 		if (id < Data.entries.length){
 			id ++;
 			location.hash = ''; 			// force the back button to go to the day view.
@@ -90,7 +90,7 @@ function contentDiv(vals, title, content){
 		div[k] = vals[k];
 	}
 	div.classList.add('content');
-	var t = document.createElement('h4');
+	var t = document.createElement('h3');
 	t.innerHTML = title;
 	t.classList.add('content-title');
 	div.appendChild(t);

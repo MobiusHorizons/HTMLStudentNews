@@ -5,13 +5,13 @@ module.exports = function(grunt) {
 			"options" : { "seperator" : ";" },
 			build: {
 				files:{
-					'js/app.js':['src/jsonp.js','src/tools.js','src/ui.js','src/main.js'],
+					'js/app.js':['src/jsonp.js','src/tools.js','src/ui.js','src/Touch.js','src/main.js'],
 					'css/styles.css':['src/styles.css']
 				}
 			},
 			test: {
 				files:{
-					'js/app.min.js':['src/jsonp.js','src/tools.js','src/ui.js','src/main.js'],
+					'js/app.min.js':['src/jsonp.js','src/tools.js','src/ui.js','src/Touch.js','src/main.js'],
 					'css/styles.min.css':['src/styles.css']
 				}
 			}
